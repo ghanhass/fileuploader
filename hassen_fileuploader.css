@@ -1,0 +1,31 @@
+.hfuFileinputPrototype{
+    width:100%;
+    height:100%;
+    opacity:0;
+    cursor:pointer;  
+}
+
+.hfuContainerDiv{
+    border:2px solid #a4a4a4;
+	border-style: dashed;
+    width:200px;
+    height:200px;
+    position:relative;
+}
+.hfuContainerDivFocus{
+	border-color: green;
+}
+.hfuAbsoluteDiv{
+    width:100%;
+    height:100%;
+    position:absolute;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.hfuDropHere{
+    color: #d7d7d7;
+}
+.hfuDropHereFocus{
+    color: black;
+}
