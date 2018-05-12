@@ -4,7 +4,7 @@ function hfu(config){
     		'drophereText' : 'Drop files here',
 		},
     	"fr" : {
-			'drophereText' : 'Glissez ici',
+			'drophereText' : 'Glissez vos fichiers ici',
 		},
 	}
   var hfuFileinputPrototype = document.querySelector(config.hfuFileinputPrototype);
@@ -17,10 +17,10 @@ function hfu(config){
   var hfuAbsoluteDiv = document.createElement("div");
   var hfuDropHere =  document.createElement("h3");
 
-  if(config.lang && Object.keys(texts).indexOf(config.lang) != -1){
+  if(config.lang && Object.keys(texts).indexOf(config.lang) != -1){ //lang chosen for the hfuDropHere ?
   	hfuDropHere.textContent = texts[config.lang].drophereText;
   }
-  else{
+  else{// english default for the hfuDropHere
 	hfuDropHere.textContent = texts.en.drophereText;
   }
 
@@ -28,12 +28,13 @@ function hfu(config){
   hfuAbsoluteDiv.classList.add("hfuAbsoluteDiv");
   hfuDropHere.classList.add("hfuDropHere");
   
-  if(config.hfuContainerDivClass){
+  if(config.hfuContainerDivClass){//User custom class for hfuContainerDiv
 	 hfuContainerDiv.classList.add(config.hfuContainerDivClass);
   }
-  if(config.hfuDropHereClass){
-	 hfuContainerDiv.classList.add(config.hfuDropHereClass);
+  if(config.hfuDropHereClass){// User custom class for hfuDropHere
+	 hfuDropHere.classList.add(config.hfuDropHereClass);
   }
+
 
   hfuAbsoluteDiv.appendChild(hfuDropHere);
   hfuContainerDiv.appendChild(hfuAbsoluteDiv);
@@ -95,7 +96,5 @@ function hfu(config){
     }
   });
 
-  
+//END events  
 }
-
-

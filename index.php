@@ -16,7 +16,9 @@
 <script>
 hfu({
 	'hfuFileinputPrototype' : "#fileinput_prototype",
-	"lang" : "fr",
+	   "lang" : "fr",
+	   "hfuContainerDivClass" : "myContainerClass",
+	   "hfuDropHereClass" : "myDropHereClass",
 });
 </script>
 </body>
