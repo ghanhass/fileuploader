@@ -10,14 +10,19 @@
 </head>
 <body>	
 <input id='myFileinput' type="file" name='myFileinput' multiple="multiple" >
+<div id='filesList'>
+</div>
 <script src="hassen_fileuploader.js">
 </script>
 <script>
 hfu({
 	'hfuFileinputPrototype' : "#myFileinput",
-	"lang" : "en",
+	"hfufilesList" : "#filesList",
+
 	"hfuContainerDivClass" : "myContainerClass",
 	"hfuDropHereClass" : "myDropHereClass",
+
+	"lang" : "en",
 });
 </script>
 </body>
