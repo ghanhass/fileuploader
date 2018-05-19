@@ -8,7 +8,8 @@
  * @param {String} config.hfuContainerDivClass - custom class to apply on the outer container DIV of the plugin.
  * @param {String} config.myDropHereClass - custom class to apply on the drop-here text of the plugin.
  * @param {String} config.lang - main language of the plugin. (en/fr).
- * 
+ * @param {Array} config.fileTypes - Array of allowed file extensions.
+ *
  */
 function hfu(config) {
     var texts = {
