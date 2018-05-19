@@ -6,7 +6,10 @@
 <link href="hassen_fileuploader.css" rel="stylesheet">
 
 <!-- styles of stories-->
-
+<style>
+.myFilesList{float:left;}
+.myContainerClass{float:left;margin-right:10px;}
+</style>
 </head>
 <body>	
 <input id='myFileinput' type="file" name='myFileinput' multiple="multiple" >
@@ -16,13 +19,14 @@
 </script>
 <script>
 hfu({
-	'hfuFileinputPrototype' : "#myFileinput",
-	"hfufilesList" : "#filesList",
+'hfuFileinputPrototype' : "#myFileinput",
 
-	"hfuContainerDivClass" : "myContainerClass",
-	"hfuDropHereClass" : "myDropHereClass",
+"hfuFilesList" : "#filesList",
+"hfuFilesListClass" : "myFilesList",
 
-	"lang" : "en",
+"hfuContainerDivClass" : "myContainerClass",
+"hfuDropHereClass" : "myDropHereClass",
+"lang" : "en",
 });
 </script>
 </body>
