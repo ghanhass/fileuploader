@@ -25,7 +25,9 @@ hfu({
 "hfuFilesListClass" : "myFilesList",
 
 "hfuContainerDivClass" : "myContainerClass",
+"hfuContainerDivFocusClass" : "focus_ContainerDiv",
 "hfuDropHereClass" : "myDropHereClass",
+"hfuDropHereFocusClass" : "focus_DropHere",
 "lang" : "en",
 });
 </script>
