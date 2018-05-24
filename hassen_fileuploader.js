@@ -89,7 +89,7 @@ function hfu(config) {
         console.log(this.files);
         console.log(event.timeStamp);
         var newDivElement = document.createElement("div");
-        newDivElement.innerHTML = "<span style='margin-right:5px'>" + this.files[0].name + "</span><button type='button' class='hfiRemoveFileBtn' data-id='" + event.timeStamp + "'>X</button>";
+        newDivElement.innerHTML = "<span style='margin-right:5px'>" + this.files[0].name + "</span><button type='button' class='hfuRemoveFileBtn' data-id='" + event.timeStamp + "'>X</button>";
         hfuFilesList.appendChild(newDivElement);
         var newInput = this.cloneNode(true);
         newInput.setAttribute("name", config.fileName);
@@ -178,6 +178,12 @@ function hfu(config) {
             }
         }
     });
+    document.addEventListener("click", function(event) {
+        if (event.target.classList.contains("hfuRemoveFileBtn")) {
+            console.log("remove btn clicked");
+            //document.querySelector("input[data-id='" + this.dataset.id + "']").parent
+        }
+    })
 
     //END events  
 }
