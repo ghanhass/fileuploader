@@ -34,25 +34,3 @@
 .hfuDropHereFocus {
     color: black;
 }
-
-.myFilesList>div>span {
-    float: left;
-    margin-right: 5px;
-    max-width: 80%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.myFilesList>div>button {
-    float: right;
-}
-
-.myFilesList div {
-    width: 100%;
-    min-height: 25px;
-    border: 1px solid grey;
-    max-width: 400px;
-    max-height: 30px;
-    margin-bottom: 2px;
-}

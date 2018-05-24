@@ -8,8 +8,34 @@
 <!-- styles of stories-->
 <style>
 .myFilesList{
-  float:left;
+  float: left;
   min-width: 200px;
+  overflow-y: auto;
+  max-height: 211px;
+  overflow-x: hidden;
+  padding-right:5px;
+  padding-left:5px;
+}
+.myFilesList>div>span {
+    float: left;
+    margin-right: 5px;
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.myFilesList>div>button {
+    float: right;
+}
+
+.myFilesList div {
+    width: 100%;
+    min-height: 25px;
+    border: 1px solid grey;
+    max-width: 400px;
+    max-height: 30px;
+    margin-bottom: 2px;
 }
 .myContainerClass{
   float:left;
