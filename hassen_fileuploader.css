@@ -1,32 +1,58 @@
-.hfuFileinputPrototype{
-    width:100%;
-    height:100%;
-    opacity:0;
-    cursor:pointer;  
+.hfuFileinputPrototype {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
 }
 
-.hfuContainerDiv{
-    border:2px solid #a4a4a4;
-	border-style: dashed;
-    width:200px;
-    height:200px;
-    position:relative;
+.hfuContainerDiv {
+    border: 2px solid #a4a4a4;
+    border-style: dashed;
+    width: 200px;
+    height: 200px;
+    position: relative;
 }
-.hfuContainerDivFocus{
-	border-color: green;
+
+.hfuContainerDivFocus {
+    border-color: green;
 }
-.hfuAbsoluteDiv{
-    width:100%;
-    height:100%;
-    position:absolute;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+
+.hfuAbsoluteDiv {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.hfuDropHere{
+
+.hfuDropHere {
     color: #d7d7d7;
-	text-align: center;
+    text-align: center;
 }
-.hfuDropHereFocus{
+
+.hfuDropHereFocus {
     color: black;
+}
+
+.myFilesList>div>span {
+    float: left;
+    margin-right: 5px;
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.myFilesList>div>button {
+    float: right;
+}
+
+.myFilesList div {
+    width: 100%;
+    min-height: 25px;
+    border: 1px solid grey;
+    max-width: 400px;
+    max-height: 30px;
+    margin-bottom: 2px;
 }

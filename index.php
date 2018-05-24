@@ -7,8 +7,14 @@
 
 <!-- styles of stories-->
 <style>
-.myFilesList{float:left;}
-.myContainerClass{float:left;margin-right:10px;}
+.myFilesList{
+  float:left;
+  min-width: 200px;
+}
+.myContainerClass{
+  float:left;
+  margin-right:10px;
+}
 </style>
 </head>
 <body>	
