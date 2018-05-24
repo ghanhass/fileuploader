@@ -83,13 +83,25 @@ function hfu(config) {
     hfuFileinputPrototype = document.querySelector(config.hfuFileinputPrototype);
     ////END building elements
 
-    hfuFileinputPrototype.addEventListener("change", function() {
+    hfuFileinputPrototype.addEventListener("change", function(event) {
         console.log("input changed !");
         console.log(this);
         console.log(this.files);
+        console.log(event.timeStamp);
         var newDivElement = document.createElement("div");
-        newDivElement.innerHTML = "<span style='margin-right:5px'>" + this.files[0].name + "</span><button type='button' class='hfiRemoveFileBtn'>X</button>";
+        newDivElement.innerHTML = "<span style='margin-right:5px'>" + this.files[0].name + "</span><button type='button' class='hfiRemoveFileBtn' data-id='" + event.timeStamp + "'>X</button>";
         hfuFilesList.appendChild(newDivElement);
+        var newInput = this.cloneNode(true);
+        newInput.setAttribute("name", config.fileName);
+
+        newInput.removeAttribute("id");
+        newInput.removeAttribute("name");
+        newInput.removeAttribute("class");
+        newInput.removeAttribute("title");
+
+        newInput.style.cssText = "display: none";
+        newInput.dataset.id = event.timeStamp;
+        hfuDataDiv.appendChild(newInput);
     });
 
     //START events

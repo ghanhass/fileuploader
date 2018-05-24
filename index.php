@@ -61,6 +61,7 @@ hfu({
 "hfuDropHereClass" : "myDropHereClass",
 "hfuDropHereFocusClass" : "focus_DropHere",
 "lang" : "fr",
+"fileName" : "myFile[]"
 });
 </script>
 </body>
