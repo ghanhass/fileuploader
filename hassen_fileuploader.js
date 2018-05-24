@@ -16,11 +16,13 @@
  */
 function hfu(config) {
     var texts = {
-        "en": {
-            'drophereText': 'Drop files here',
+        "dropHereText": {
+            'en': 'Drop files here',
+            'fr': 'Glissez vos fichiers ici',
         },
-        "fr": {
-            'drophereText': 'Glissez vos fichiers ici',
+        "deleteFile": {
+            'en': 'Delete file',
+            'fr': 'Supprimer le fichier',
         },
     }
     var hfuFileinputPrototype = document.querySelector(config.hfuFileinputPrototype);
@@ -44,12 +46,12 @@ function hfu(config) {
     var hfuDataDiv = document.createElement("div");
 
     //START - setting texts
-    if (config.lang && Object.keys(texts).indexOf(config.lang) != -1) { //lang chosen for the hfuDropHere ?
-        hfuDropHere.textContent = texts[config.lang].drophereText;
-        hfuFileinputPrototype.setAttribute("title", texts[config.lang].drophereText);
+    if (Object.keys(texts.dropHereText).indexOf(config.lang) != -1) { //lang chosen for the hfuDropHere ?
+        hfuDropHere.textContent = texts.dropHereText[config.lang];
+        hfuFileinputPrototype.setAttribute("title", texts.dropHereText[config.lang]);
     } else { // english default for the hfuDropHere
-        hfuDropHere.textContent = texts.en.drophereText;
-        hfuFileinputPrototype.setAttribute("title", texts.en.drophereText);
+        hfuDropHere.textContent = texts.dropHereText.en;
+        hfuFileinputPrototype.setAttribute("title", texts.dropHereText.en);
     }
     //END - setting texts
 

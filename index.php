@@ -34,7 +34,7 @@ hfu({
 "hfuContainerDivFocusClass" : "focus_ContainerDiv",
 "hfuDropHereClass" : "myDropHereClass",
 "hfuDropHereFocusClass" : "focus_DropHere",
-"lang" : "en",
+"lang" : "fr",
 });
 </script>
 </body>
