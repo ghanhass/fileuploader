@@ -180,8 +180,12 @@ function hfu(config) {
     });
     document.addEventListener("click", function(event) {
         if (event.target.classList.contains("hfuRemoveFileBtn")) {
+            removeBtnElement = event.target;
             console.log("remove btn clicked");
-            //document.querySelector("input[data-id='" + this.dataset.id + "']").parent
+            var inputElement = document.querySelector("input[data-id='" + removeBtnElement.dataset.id + "']");
+            inputElement.parentNode.removeChild(inputElement);
+            var divElement = removeBtnElement.parentNode;
+            divElement.parentNode.removeChild(divElement);
         }
     })
 
