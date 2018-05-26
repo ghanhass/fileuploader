@@ -27,6 +27,9 @@
 
 .myFilesList>div>button {
     float: right;
+    height: 23px;
+    width: 23px;
+    padding: 1px;
 }
 
 .myFilesList div {
