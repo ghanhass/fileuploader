@@ -5,8 +5,9 @@
  * //config elements:
  * @param {HTMLElement} config.hfuFileinputPrototype - main file input to apply the plugin on. (CSS selector)
  * @param {HTMLElement} config.hfuFilesList - HTMLElement in which the selected files' names menu will be shown up. (CSS selector)
- * @param {String} config.hfuContainerDivClass - custom class to apply on the outer container DIV of the plugin.
- * @param {String} config.hfuDropHereClass - custom class to apply on the drop-here text of the plugin.
+ * @param {Array} config.hfuContainerDivClass - Array of custom classes to apply on the outer container DIV of the plugin.
+ * @param {Array} config.hfuDropHereClass - Array of custom classes to apply on the drop-here text of the plugin.
+ * @param {Array} config.hfuFilesListClass - Array of custom classes to apply on the files list of the plugin.
  * @param {String} config.hfuContainerDivFocusClass - custom class to apply on the outer container DIV of the plugin in focus mode (on hover).
  * @param {String} config.hfuDropHereFocusClass - custom class to apply on the drop-here text of the plugin in focus mode (on hover).
  * @param {String} config.lang - main language of the plugin. (en/fr). - defaults to en
@@ -46,7 +47,7 @@ function hfu(config) {
     var hfuDataDiv = document.createElement("div");
 
     //START - setting texts
-    if (Object.keys(texts.dropHereText).indexOf(config.lang) != -1) { //lang chosen for the hfuDropHere ?
+    if (Object.keys(texts.dropHereText).indexOf(config.lang) != -1) { //lang chosen for the hfuDropHere is valid?
         hfuDropHere.textContent = texts.dropHereText[config.lang];
         hfuFileinputPrototype.setAttribute("title", texts.dropHereText[config.lang]);
     } else { // english default for the hfuDropHere
@@ -60,16 +61,24 @@ function hfu(config) {
     hfuDropHere.classList.add("hfuDropHere");
     hfuDataDiv.classList.add("hfuDataDiv");
 
-    if (config.hfuContainerDivClass) { //User custom class for hfuContainerDiv
-        hfuContainerDiv.classList.add(config.hfuContainerDivClass);
+    if (Array.isArray(config.hfuContainerDivClass)) { //User list of custom classes for hfuContainerDiv
+        for (let i = 0; i < config.hfuContainerDivClass.length; i++){
+            hfuContainerDiv.classList.add(config.hfuContainerDivClass[i]);
+        }
     }
-    if (config.hfuDropHereClass) { // User custom class for hfuDropHere
-        hfuDropHere.classList.add(config.hfuDropHereClass);
+    //
+    if (Array.isArray(config.hfuDropHereClass)) { //User list of custom classes for hfuDropHere
+        for (let i = 0; i < config.hfuDropHereClass.length; i++){
+            hfuDropHere.classList.add(config.hfuDropHereClass[i]);
+        }
     }
-
-    if (config.hfuFilesListClass) { // User custom class for hfuFilesList
-        hfuFilesList.classList.add(config.hfuFilesListClass);
+    //
+    if (Array.isArray(config.hfuFilesListClass)) { //User list of custom classes for hfuFilesList
+        for (let i = 0; i < config.hfuFilesListClass.length; i++){
+            hfuFilesList.classList.add(config.hfuFilesListClass[i]);
+        }
     }
+    //
 
     hfuAbsoluteDiv.appendChild(hfuDropHere);
 

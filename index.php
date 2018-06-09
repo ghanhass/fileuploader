@@ -57,11 +57,11 @@ hfu({
 'hfuFileinputPrototype' : "#myFileinput",
 
 "hfuFilesList" : "#filesList",
-"hfuFilesListClass" : "myFilesList",
+"hfuFilesListClass" : ["myFilesList","myFilesList_1","myFilesList_2"],
 
-"hfuContainerDivClass" : "myContainerClass",
+"hfuContainerDivClass" : ["myContainerClass","myContainerClass_1","myContainerClass_2"],
 "hfuContainerDivFocusClass" : "focus_ContainerDiv",
-"hfuDropHereClass" : "myDropHereClass",
+"hfuDropHereClass" : ["myDropHereClass_1","myDropHereClass_2"],
 "hfuDropHereFocusClass" : "focus_DropHere",
 "lang" : "fr",
 "fileName" : "myFile[]"
