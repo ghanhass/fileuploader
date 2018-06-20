@@ -97,9 +97,36 @@ function hfu(config) {
         console.log(this);
         console.log(this.files);
         console.log(event.timeStamp);
-        var newDivElement = document.createElement("div");
-        newDivElement.innerHTML = "<span style='margin-right:5px'>" + this.files[0].name + "</span><button type='button' class='hfuRemoveFileBtn' data-id='" + event.timeStamp + "'>X</button>";
+	    var newDivElement = document.createElement("div");
+	    var hfuFilenameSpan = document.createElement("span");
+	    hfuFilenameSpan.textContent = this.files[0].name;
+ 	    hfuFilenameSpan.classList.add("hfuFilenameSpan");
+        var hfuRemoveFileBtn = document.createElement("button");
+	    
+	    hfuRemoveFileBtn.setAttribute("type", "button");
+	    hfuRemoveFileBtn.classList.add("hfuRemoveFileBtn");
+	   	hfuRemoveFileBtn.dataset.id = event.timeStamp;
+	    hfuRemoveFileBtn.textContent = 'X';
+     	newDivElement.appendChild(hfuFilenameSpan);
+     	newDivElement.appendChild(hfuRemoveFileBtn);
+	    
         hfuFilesList.appendChild(newDivElement);
+
+	   	//Start - add custom classes for hfuRemoveFileBtn  and  hfuFilenameSpan  DOM elements
+	    
+		if (Array.isArray(config.hfuFilenameSpanClass)) { //User list of custom classes for hfuFilenameSpan
+	        for (let i = 0; i < config.hfuFilenameSpanClass.length; i++){
+            	hfuFilenameSpan.classList.add(config.hfuFilenameSpanClass[i]);
+        	}
+		}
+	    //
+	    if (Array.isArray(config.hfuRemoveFileBtnClass)) { //User list of custom classes for hfuRemoveFileBtn
+	        for (let i = 0; i < config.hfuRemoveFileBtnClass.length; i++){
+            	hfuRemoveFileBtn.classList.add(config.hfuRemoveFileBtnClass[i]);
+        	}
+    	}
+
+	    //END - add custom classes for hfuRemoveFileBtn  and  hfuFilenameSpan  DOM elements
         var newInput = this.cloneNode(true);
         newInput.setAttribute("name", config.fileName);
 
@@ -146,6 +173,9 @@ function hfu(config) {
             //event.preventDefault();
         } else {
             console.log("dragover !");
+            if (!hfuContainerDiv.classList.contains('hfuContainerDivFocus')) {
+                hfuContainerDiv.classList.add('hfuContainerDivFocus');
+            }
             if (!hfuContainerDiv.classList.contains('hfuContainerDivFocus')) {
                 hfuContainerDiv.classList.add('hfuContainerDivFocus');
             }
@@ -201,6 +231,3 @@ function hfu(config) {
     //END events  
 }
 //
-function draw_file(file, hfuFilesList) {
-
-}
