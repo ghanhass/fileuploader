@@ -53,7 +53,7 @@
 <script src="hassen_fileuploader.js">
 </script>
 <script>
-hfu({
+hfu_object = new hfu({
 'hfuFileinputPrototype' : "#myFileinput",
 
 "hfuFilesList" : "#filesList",
@@ -63,7 +63,7 @@ hfu({
 "hfuContainerDivFocusClass" : "focus_ContainerDiv",
 "hfuDropHereClass" : ["myDropHereClass_1","myDropHereClass_2"],
 "hfuDropHereFocusClass" : "focus_DropHere",
-"lang" : "fr",
+"lang" : "en",
 "fileName" : "myFile[]",
 "hfuRemoveFileBtnClass": ["btn_class1","btn_class2", "btn_class3"],
 "hfuFilenameSpanClass": ["span_class1","span_class2", "span_class3"]
