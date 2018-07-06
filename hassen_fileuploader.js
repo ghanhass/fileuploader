@@ -1,19 +1,19 @@
 /**
- * hfu is the general function to generate the plugin
- * @param {Object} config - general configuration object when calling hfu().
+ * hfu is the general class for the plugin
+ * @param {Object} config - general configuration object when instanciating hfu().
  * 
  * //config elements:
- * @param {HTMLElement} config.hfuFileinputPrototype - main file input to apply the plugin on. (CSS selector)
- * @param {HTMLElement} config.hfuFilesList - HTMLElement in which the selected files' names menu will be shown up. (CSS selector)
- * @param {Array} config.hfuContainerDivClass - Array of custom classes to apply on the outer container DIV of the plugin.
- * @param {Array} config.hfuDropHereClass - Array of custom classes to apply on the drop-here text of the plugin.
- * @param {Array} config.hfuFilesListClass - Array of custom classes to apply on the files list of the plugin.
- * @param {String} config.hfuContainerDivFocusClass - custom class to apply on the outer container DIV of the plugin in focus mode (on hover).
- * @param {String} config.hfuDropHereFocusClass - custom class to apply on the drop-here text of the plugin in focus mode (on hover).
- * @param {String} config.lang - main language of the plugin. (en/fr). - defaults to en
- * @param {Array} config.fileTypes - Array of allowed file extensions (strings).
- * @param {String} config.fileName - File name to use for the input element in the server script (php)
- * @param {Bool} config.showTumbnail - true/false whether a thumbnail of the selected file should be shown (only images) - defaults to false
+ * @param {String} config.hfuFileinputPrototype - Main file input to apply the plugin on. (CSS selector)  => mandatory
+ * @param {String} config.hfuFilesList - HTMLElement in which the selected files' names menu will be shown up. (CSS selector) => mandatory
+ * @param {Array} config.hfuContainerDivClass - Array of custom classes to apply on the outer container DIV of the plugin. => optional
+ * @param {Array} config.hfuDropHereClass - Array of custom classes to apply on the drop-here text of the plugin. => optional
+ * @param {Array} config.hfuFilesListClass - Array of custom classes to apply on the files list of the plugin. => optional
+ * @param {String} config.hfuContainerDivFocusClass - custom class to apply on the outer container DIV of the plugin in focus mode (on hover). => optional
+ * @param {String} config.hfuDropHereFocusClass - custom class to apply on the drop-here text of the plugin in focus mode (on hover). => optional
+ * @param {String} config.lang - main language of the plugin. (en/fr). - defaults to en => optional
+ * @param {Array} config.fileTypes - Array of allowed file extensions (strings). => optional
+ * @param {String} config.fileName - File name to use for the input element in the server script (php) => mandatory
+ * @param {Bool} config.showTumbnail - true/false whether a thumbnail of the selected file should be shown (only images) - defaults to false => optional
  */
 class hfu {
     constructor(config) {
@@ -39,19 +39,114 @@ class hfu {
             this.fileName = config.fileName;
             this.hfuRemoveFileBtnClass = config.hfuRemoveFileBtnClass;
             this.hfuFilenameSpanClass = config.hfuFilenameSpanClass;
+
+            //START checking for errors
             if (document.querySelector(this.hfuFileinputPrototype)) { //hfuFileinputPrototype is a valid element ?
                 if (!(document.querySelector(this.hfuFileinputPrototype).tagName == "INPUT" && document.querySelector(this.hfuFileinputPrototype).getAttribute("type") == "file")) {
-                    throw ("hfuFileinputPrototype must be a file input element (one-element css selector string)");
+                    throw ("hfu ERROR: hfuFileinputPrototype must be a file input element name (one-element css selector string)");
                 }
             } else {
-                throw ("hfuFileinputPrototype property is mandatory (one-element css selector string)");
+                throw ("hfu ERROR: hfuFileinputPrototype property is mandatory (one-element css selector string)");
             }
+            //
             console.log(document.querySelector(this.hfuFilesList));
             if (!document.querySelector(this.hfuFilesList)) {
-                throw ("hfuFilesList property is mandatory (one-element css selector string)");
-            } else if (this.fileName.indexOf(" ") !== -1) {
-                throw ("fileName property is mandatory (string)");
+                throw ("hfu ERROR: hfuFilesList property is mandatory (one-element css selector string)");
+            } else if (this.fileName.indexOf(" ") != -1) {
+                throw ("hfu ERROR: fileName property is mandatory (string)");
             }
+            //
+            if (this.hfuFilesListClass != undefined) {
+                if (Array.isArray(this.hfuFilesListClass)) {
+                    for (let i = 0; i < this.hfuFilesListClass.length; i++) {
+                        if (this.hfuFilesListClass[i].indexOf(" ") != -1) {
+                            throw ("hfu ERROR: hfuFilesListClass property must be an Array of class names");
+                            break;
+                        }
+                    }
+                } else {
+                    throw ("hfu ERROR: hfuFilesListClass property must be an Array of class names");
+                }
+            }
+            //
+            if (this.hfuContainerDivClass != undefined) {
+                if (typeof(this.hfuContainerDivClass) != "string") {
+                    throw ("hfu ERROR: hfuContainerDivClass property must be a class name (String)");
+                } else {
+                    if (this.hfuContainerDivClass.indexOf(" ") != -1) {
+                        throw ("hfu ERROR: hfuContainerDivClass property must be a class name (non-spaced String)");
+                    }
+                }
+            }
+            //
+            if (this.hfuContainerDivFocusClass != undefined) {
+                if (typeof(this.hfuContainerDivFocusClass) != "string") {
+                    throw ("hfu ERROR: hfuContainerDivFocusClass property must be a class name (String)");
+                } else {
+                    if (this.hfuContainerDivFocusClass.indexOf(" ") != -1) {
+                        throw ("hfu ERROR: hfuContainerDivFocusClass property must be a class name (non-spaced String)");
+                    }
+                }
+            }
+            //
+            if (this.hfuDropHereClass != undefined) {
+                if (typeof(this.hfuDropHereClass) != "string") {
+                    throw ("hfu ERROR: hfuDropHereClass property must be a class name (String)");
+                } else {
+                    if (this.hfuDropHereClass.indexOf(" ") != -1) {
+                        throw ("hfu ERROR: hfuDropHereClass property must be a class name (non-spaced String)");
+                    }
+                }
+            }
+            //
+            if (this.hfuDropHereFocusClass != undefined) {
+                if (typeof(this.hfuDropHereFocusClass) != "string") {
+                    throw ("hfu ERROR: hfuDropHereFocusClass property must be a class name (String)");
+                } else {
+                    if (this.hfuDropHereFocusClass.indexOf(" ") != -1) {
+                        throw ("hfu ERROR: hfuDropHereFocusClass property must be a class name (non-spaced String)");
+                    }
+                }
+            }
+            //
+            if (this.lang != undefined) {
+                if (typeof(this.lang) != "string") {
+                    throw ("hfu ERROR: lang property must be a String");
+                }
+            }
+            //
+            if (this.fileName != undefined) {
+                if (typeof(this.fileName) != "string") {
+                    throw ("hfu ERROR: fileName property must be an input name (String)");
+                } else {
+                    if (this.fileName.indexOf(" ") == -1) {
+                        throw ("hfu ERROR: fileName property must be an input name (non-spaced String)");
+                    }
+                }
+            }
+            //
+            if (this.hfuRemoveFileBtnClass != undefined) {
+                if (typeof(this.hfuRemoveFileBtnClass) != "string") {
+                    throw ("hfu ERROR: hfuRemoveFileBtnClass property must be a class name (String)");
+                } else {
+                    if (this.hfuRemoveFileBtnClass.indexOf(" ")) {
+                        throw ("hfu ERROR: hfuRemoveFileBtnClass property must be a class name (non-spaced String)");
+                    }
+                }
+            }
+            //
+            if (this.hfuFilenameSpanClass != undefined) {
+                if (typeof(this.hfuFilenameSpanClass) != "string") {
+                    throw ("hfu ERROR: hfuFilenameSpanClass property must be a class name (String)");
+                } else {
+                    if (this.hfuFilenameSpanClass.indexOf(" ")) {
+                        throw ("hfu ERROR: hfuRemoveFileBtnClass property must be a class name (non-spaced String)");
+                    }
+                }
+            }
+            //
+
+            //END checking for errors
 
             let hfuFileinputPrototype = document.querySelector(this.hfuFileinputPrototype);
             let hfuFilesList = document.querySelector(config.hfuFilesList);
