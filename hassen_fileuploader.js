@@ -6,10 +6,14 @@
  * @param {String} config.hfuFileinputPrototype - Main file input to apply the plugin on. (CSS selector)  => mandatory
  * @param {String} config.hfuFilesList - HTMLElement in which the selected files' names menu will be shown up. (CSS selector) => mandatory
  * @param {Array} config.hfuContainerDivClass - Array of custom classes to apply on the outer container DIV of the plugin. => optional
- * @param {Array} config.hfuDropHereClass - Array of custom classes to apply on the drop-here text of the plugin. => optional
+ * @param {Array} config.hfuDropHereTextClass - Array of custom classes to apply on the drop-here text of the plugin. => optional
+ * @param {Array} config.hfuDropHereAreaClass - Array of custom classes to apply on the drop-here area of the plugin. => optional
  * @param {Array} config.hfuFilesListClass - Array of custom classes to apply on the files list of the plugin. => optional
- * @param {String} config.hfuContainerDivFocusClass - custom class to apply on the outer container DIV of the plugin in focus mode (on hover). => optional
- * @param {String} config.hfuDropHereFocusClass - custom class to apply on the drop-here text of the plugin in focus mode (on hover). => optional
+ * @param {Array} config.hfuContainerDivFocusClass - Array of custom classes to apply on the outer container DIV of the plugin in focus mode (on hover). => optional
+ * @param {Array} config.hfuDropHereFocusClass - Array of custom classes to apply on the drop-here text of the plugin in focus mode (on hover). => optional
+ * @param {Array} config.hfuRemoveFileBtnClass - Array of custom classes to apply on the hfuRemoveFileBtn of the plugin . => optional
+ * @param {Array} config.hfuFilenameSpanClass - Array of custom classes to apply on the hfuFilenameSpan of the plugin . => optional
+ * @param {Array} config.hfuRemoveFileBtnClass - Array of custom classes to apply on the hfuRemoveFileBtn of the plugin . => optional
  * @param {String} config.lang - main language of the plugin. (en/fr). - defaults to en => optional
  * @param {Array} config.fileTypes - Array of allowed file extensions (strings). => optional
  * @param {String} config.fileName - File name to use for the input element in the server script (php) => mandatory
@@ -33,8 +37,8 @@ class hfu {
             this.hfuFilesListClass = config.hfuFilesListClass;
             this.hfuContainerDivClass = config.hfuContainerDivClass;
             this.hfuContainerDivFocusClass = config.hfuContainerDivFocusClass;
-            this.hfuDropHereClass = config.hfuDropHereClass;
-            this.hfuDropHereFocusClass = config.hfuDropHereFocusClass;
+            this.hfuDropHereTextClass = config.hfuDropHereTextClass;
+            this.hfuDropHereTextFocusClass = config.hfuDropHereTextFocusClass;
             this.lang = config.lang;
             this.fileName = config.fileName;
             this.hfuRemoveFileBtnClass = config.hfuRemoveFileBtnClass;
@@ -52,8 +56,6 @@ class hfu {
             console.log(document.querySelector(this.hfuFilesList));
             if (!document.querySelector(this.hfuFilesList)) {
                 throw ("hfu ERROR: hfuFilesList property is mandatory (one-element css selector string)");
-            } else if (this.fileName.indexOf(" ") != -1) {
-                throw ("hfu ERROR: fileName property is mandatory (string)");
             }
             //
             if (this.hfuFilesListClass != undefined) {
@@ -70,42 +72,67 @@ class hfu {
             }
             //
             if (this.hfuContainerDivClass != undefined) {
-                if (typeof(this.hfuContainerDivClass) != "string") {
-                    throw ("hfu ERROR: hfuContainerDivClass property must be a class name (String)");
-                } else {
-                    if (this.hfuContainerDivClass.indexOf(" ") != -1) {
-                        throw ("hfu ERROR: hfuContainerDivClass property must be a class name (non-spaced String)");
+                if (Array.isArray(this.hfuContainerDivClass)) {
+                    for (let i = 0; i < this.hfuContainerDivClass.length; i++) {
+                        if (this.hfuContainerDivClass[i].indexOf(" ") != -1) {
+                            throw ("hfu ERROR: hfuContainerDivClass property must be an Array of class names");
+                            break;
+                        }
                     }
+                } else {
+                    throw ("hfu ERROR: hfuContainerDivClass property must be an Array of class names");
                 }
             }
             //
             if (this.hfuContainerDivFocusClass != undefined) {
-                if (typeof(this.hfuContainerDivFocusClass) != "string") {
-                    throw ("hfu ERROR: hfuContainerDivFocusClass property must be a class name (String)");
-                } else {
-                    if (this.hfuContainerDivFocusClass.indexOf(" ") != -1) {
-                        throw ("hfu ERROR: hfuContainerDivFocusClass property must be a class name (non-spaced String)");
+                if (Array.isArray(this.hfuContainerDivFocusClass)) {
+                    for (let i = 0; i < this.hfuContainerDivFocusClass.length; i++) {
+                        if (this.hfuContainerDivFocusClass[i].indexOf(" ") != -1) {
+                            throw ("hfu ERROR: hfuContainerDivFocusClass property must be an Array of class names");
+                            break;
+                        }
                     }
+                } else {
+                    throw ("hfu ERROR: hfuContainerDivFocusClass property must be an Array of class names");
                 }
             }
             //
-            if (this.hfuDropHereClass != undefined) {
-                if (typeof(this.hfuDropHereClass) != "string") {
-                    throw ("hfu ERROR: hfuDropHereClass property must be a class name (String)");
-                } else {
-                    if (this.hfuDropHereClass.indexOf(" ") != -1) {
-                        throw ("hfu ERROR: hfuDropHereClass property must be a class name (non-spaced String)");
+            if (this.hfuDropHereAreaClass != undefined) {
+                if (Array.isArray(this.hfuDropHereAreaClass)) {
+                    for (let i = 0; i < this.hfuDropHereAreaClass.length; i++) {
+                        if (this.hfuDropHereAreaClass[i].indexOf(" ") != -1) {
+                            throw ("hfu ERROR: hfuDropHereAreaClass property must be an Array of class names");
+                            break;
+                        }
                     }
+                } else {
+                    throw ("hfu ERROR: hfuDropHereAreaClass property must be an Array of class names");
                 }
             }
             //
-            if (this.hfuDropHereFocusClass != undefined) {
-                if (typeof(this.hfuDropHereFocusClass) != "string") {
-                    throw ("hfu ERROR: hfuDropHereFocusClass property must be a class name (String)");
-                } else {
-                    if (this.hfuDropHereFocusClass.indexOf(" ") != -1) {
-                        throw ("hfu ERROR: hfuDropHereFocusClass property must be a class name (non-spaced String)");
+            if (this.hfuDropHereTextClass != undefined) {
+                if (Array.isArray(this.hfuDropHereTextClass)) {
+                    for (let i = 0; i < this.hfuDropHereTextClass.length; i++) {
+                        if (this.hfuDropHereTextClass[i].indexOf(" ") != -1) {
+                            throw ("hfu ERROR: hfuDropHereTextClass property must be an Array of class names");
+                            break;
+                        }
                     }
+                } else {
+                    throw ("hfu ERROR: hfuDropHereTextClass property must be an Array of class names");
+                }
+            }
+            //
+            if (this.hfuDropHereTextFocusClass != undefined) {
+                if (Array.isArray(this.hfuDropHereTextFocusClass)) {
+                    for (let i = 0; i < this.hfuDropHereTextFocusClass.length; i++) {
+                        if (this.hfuDropHereTextFocusClass[i].indexOf(" ") != -1) {
+                            throw ("hfu ERROR: hfuDropHereTextFocusClass property must be an Array of class names");
+                            break;
+                        }
+                    }
+                } else {
+                    throw ("hfu ERROR: hfuDropHereTextFocusClass property must be an Array of class names");
                 }
             }
             //
@@ -119,33 +146,38 @@ class hfu {
                 if (typeof(this.fileName) != "string") {
                     throw ("hfu ERROR: fileName property must be an input name (String)");
                 } else {
-                    if (this.fileName.indexOf(" ") == -1) {
+                    if (this.fileName.indexOf(" ") != -1) {
                         throw ("hfu ERROR: fileName property must be an input name (non-spaced String)");
                     }
                 }
             }
             //
             if (this.hfuRemoveFileBtnClass != undefined) {
-                if (typeof(this.hfuRemoveFileBtnClass) != "string") {
-                    throw ("hfu ERROR: hfuRemoveFileBtnClass property must be a class name (String)");
-                } else {
-                    if (this.hfuRemoveFileBtnClass.indexOf(" ")) {
-                        throw ("hfu ERROR: hfuRemoveFileBtnClass property must be a class name (non-spaced String)");
+                if (Array.isArray(this.hfuRemoveFileBtnClass)) {
+                    for (let i = 0; i < this.hfuRemoveFileBtnClass.length; i++) {
+                        if (this.hfuRemoveFileBtnClass[i].indexOf(" ") != -1) {
+                            throw ("hfu ERROR: hfuRemoveFileBtnClass property must be an Array of class names");
+                            break;
+                        }
                     }
+                } else {
+                    throw ("hfu ERROR: hfuRemoveFileBtnClass property must be an Array of class names");
                 }
             }
             //
             if (this.hfuFilenameSpanClass != undefined) {
-                if (typeof(this.hfuFilenameSpanClass) != "string") {
-                    throw ("hfu ERROR: hfuFilenameSpanClass property must be a class name (String)");
-                } else {
-                    if (this.hfuFilenameSpanClass.indexOf(" ")) {
-                        throw ("hfu ERROR: hfuRemoveFileBtnClass property must be a class name (non-spaced String)");
+                if (Array.isArray(this.hfuFilenameSpanClass)) {
+                    for (let i = 0; i < this.hfuFilenameSpanClass.length; i++) {
+                        if (this.hfuFilenameSpanClass[i].indexOf(" ") != -1) {
+                            throw ("hfu ERROR: hfuFilenameSpanClass property must be an Array of class names");
+                            break;
+                        }
                     }
+                } else {
+                    throw ("hfu ERROR: hfuFilenameSpanClass property must be an Array of class names");
                 }
             }
             //
-
             //END checking for errors
 
             let hfuFileinputPrototype = document.querySelector(this.hfuFileinputPrototype);
@@ -164,23 +196,23 @@ class hfu {
 
             ////START - building elements
             let hfuContainerDiv = document.createElement("div");
-            let hfuAbsoluteDiv = document.createElement("div");
-            let hfuDropHere = document.createElement("h3");
+            let hfuDropHereArea = document.createElement("div");
+            let hfuDropHereText = document.createElement("h3");
             let hfuDataDiv = document.createElement("div");
 
             //START - setting texts
-            if (Object.keys(texts.dropHereText).indexOf(config.lang) != -1) { //lang chosen for the hfuDropHere is valid?
-                hfuDropHere.textContent = texts.dropHereText[config.lang];
+            if (Object.keys(texts.dropHereText).indexOf(config.lang) != -1) { //lang chosen for the hfuDropHereText is valid?
+                hfuDropHereText.textContent = texts.dropHereText[config.lang];
                 hfuFileinputPrototype.setAttribute("title", texts.dropHereText[config.lang]);
-            } else { // english default for the hfuDropHere
-                hfuDropHere.textContent = texts.dropHereText.en;
+            } else { // english default for the hfuDropHereText
+                hfuDropHereText.textContent = texts.dropHereText.en;
                 hfuFileinputPrototype.setAttribute("title", texts.dropHereText.en);
             }
             //END - setting texts
 
             hfuContainerDiv.classList.add("hfuContainerDiv");
-            hfuAbsoluteDiv.classList.add("hfuAbsoluteDiv");
-            hfuDropHere.classList.add("hfuDropHere");
+            hfuDropHereArea.classList.add("hfuDropHereArea");
+            hfuDropHereText.classList.add("hfuDropHereText");
             hfuDataDiv.classList.add("hfuDataDiv");
 
             if (Array.isArray(config.hfuContainerDivClass)) { //User list of custom classes for hfuContainerDiv
@@ -189,9 +221,15 @@ class hfu {
                 }
             }
             //
-            if (Array.isArray(config.hfuDropHereClass)) { //User list of custom classes for hfuDropHere
-                for (let i = 0; i < config.hfuDropHereClass.length; i++) {
-                    hfuDropHere.classList.add(config.hfuDropHereClass[i]);
+            if (Array.isArray(config.hfuDropHereTextClass)) { //User list of custom classes for hfuDropHereText
+                for (let i = 0; i < config.hfuDropHereTextClass.length; i++) {
+                    hfuDropHereText.classList.add(config.hfuDropHereTextClass[i]);
+                }
+            }
+            //
+            if (Array.isArray(config.hfuDropHereAreaClass)) { //User list of custom classes for hfuDropHereArea
+                for (let i = 0; i < config.hfuDropHereAreaClass.length; i++) {
+                    hfuDropHereArea.classList.add(config.hfuDropHereAreaClass[i]);
                 }
             }
             //
@@ -202,9 +240,9 @@ class hfu {
             }
             //
 
-            hfuAbsoluteDiv.appendChild(hfuDropHere);
+            hfuDropHereArea.appendChild(hfuDropHereText);
 
-            hfuContainerDiv.appendChild(hfuAbsoluteDiv);
+            hfuContainerDiv.appendChild(hfuDropHereArea);
             hfuContainerDiv.appendChild(hfuFileinputPrototype.cloneNode(true));
             hfuContainerDiv.appendChild(hfuDataDiv);
 
@@ -222,6 +260,7 @@ class hfu {
                 console.log(this.files);
                 console.log(event.timeStamp);
                 let newDivElement = document.createElement("div");
+                newDivElement.classList.add("hfuSpanBtnContainer");
                 let hfuFilenameSpan = document.createElement("span");
                 hfuFilenameSpan.textContent = this.files[0].name;
                 hfuFilenameSpan.classList.add("hfuFilenameSpan");
@@ -250,6 +289,13 @@ class hfu {
                     }
                 }
 
+                if (Array.isArray(config.hfuSpanBtnContainerClass)) { //User list of custom classes for newDivElement
+                    for (let i = 0; i < config.hfuSpanBtnContainerClass.length; i++) {
+                        newDivElement.classList.add(config.hfuSpanBtnContainerClass[i]);
+                    }
+                }
+
+
                 //END - add custom classes for hfuRemoveFileBtn  and  hfuFilenameSpan  DOM elements
                 let newInput = this.cloneNode(true);
                 newInput.setAttribute("name", config.fileName);
@@ -270,12 +316,12 @@ class hfu {
                 } else {
                     console.log("drop !");
 
-                    if (hfuDropHere.classList.contains('hfuDropHereFocus')) { //remove .hfuDropHereFocus from hfuDropHere after DROP
-                        hfuDropHere.classList.remove('hfuDropHereFocus');
+                    if (hfuDropHereText.classList.contains('hfuDropHereTextFocus')) { //remove .hfuDropHereTextFocus from hfuDropHereText after DROP
+                        hfuDropHereText.classList.remove('hfuDropHereTextFocus');
                     }
                     if (config.hfuDropHereFocusClass) {
-                        if (hfuDropHere.classList.contains(config.hfuDropHereFocusClass)) { //remove config.hfuDropHereFocusClass from hfuDropHere after DROP
-                            hfuDropHere.classList.remove(config.hfuDropHereFocusClass);
+                        if (hfuDropHereText.classList.contains(config.hfuDropHereTextFocusClass)) { //remove config.hfuDropHereTextFocusClass from hfuDropHereText after DROP
+                            hfuDropHereText.classList.remove(config.hfuDropHereTextFocusClass);
                         }
                     }
 
@@ -283,7 +329,7 @@ class hfu {
                         hfuContainerDiv.classList.remove('hfuContainerDivFocus');
                     }
                     if (config.hfuContainerDivFocusClass) {
-                        if (hfuContainerDiv.classList.contains(config.hfuContainerDivFocusClass)) { //remove config.hfuContainerDivFocusClass from hfuDropHere after DROP
+                        if (hfuContainerDiv.classList.contains(config.hfuContainerDivFocusClass)) { //remove config.hfuContainerDivFocusClass from hfuDropHereText after DROP
                             hfuContainerDiv.classList.remove(config.hfuContainerDivFocusClass);
                         }
                     }
@@ -308,12 +354,12 @@ class hfu {
                         }
                     }
 
-                    if (!hfuDropHere.classList.contains('hfuDropHereFocus')) {
-                        hfuDropHere.classList.add('hfuDropHereFocus');
+                    if (!hfuDropHereText.classList.contains('hfuDropHereTextFocus')) {
+                        hfuDropHereText.classList.add('hfuDropHereTextFocus');
                     }
-                    if (config.hfuDropHereFocusClass) {
-                        if (!hfuDropHere.classList.contains(config.hfuDropHereFocusClass)) { //add config.hfuDropHereFocusClass from hfuDropHere after DROP
-                            hfuDropHere.classList.add(config.hfuDropHereFocusClass);
+                    if (config.hfuDropHereTextFocusClass) {
+                        if (!hfuDropHereText.classList.contains(config.hfuDropHereTextFocusClass)) { //add config.hfuDropHereTextFocusClass from hfuDropHereText after DROP
+                            hfuDropHereText.classList.add(config.hfuDropHereTextFocusClass);
                         }
                     }
                 }
@@ -321,12 +367,12 @@ class hfu {
             document.addEventListener("dragleave", function(event) {
                 if (event.target.isSameNode(hfuFileinputPrototype)) { //dragleave happened on the drop file zone ?
                     console.log("dragleave !");
-                    if (hfuDropHere.classList.contains('hfuDropHereFocus')) {
-                        hfuDropHere.classList.remove('hfuDropHereFocus');
+                    if (hfuDropHereText.classList.contains('hfuDropHereTextFocus')) {
+                        hfuDropHereText.classList.remove('hfuDropHereTextFocus');
                     }
-                    if (config.hfuDropHereFocusClass) {
-                        if (hfuDropHere.classList.contains(config.hfuDropHereFocusClass)) { //remove config.hfuDropHereFocusClass from hfuDropHere after DROP
-                            hfuDropHere.classList.remove(config.hfuDropHereFocusClass);
+                    if (config.hfuDropHereTextFocusClass) {
+                        if (hfuDropHereText.classList.contains(config.hfuDropHereTextFocusClass)) { //remove config.hfuDropHereTextFocusClass from hfuDropHereText after DROP
+                            hfuDropHereText.classList.remove(config.hfuDropHereTextFocusClass);
                         }
                     }
 

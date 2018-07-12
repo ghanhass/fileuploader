@@ -3,7 +3,8 @@
 <head>
 <meta charset='utf-8'>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link href="hassen_fileuploader.css" rel="stylesheet">
+<link href="./css/hassen_fileuploader.css" rel="stylesheet">
+<link href="./css/bootstrap.min.css" rel="stylesheet">
 
 <!-- styles of stories-->
 <style>
@@ -60,12 +61,13 @@ hfu_object = new hfu({
 "hfuFilesListClass" : ["myFilesList","myFilesList_1","myFilesList_2"],
 
 "hfuContainerDivClass" : ["myContainerClass","myContainerClass_1","myContainerClass_2"],
-"hfuContainerDivFocusClass" : "focus_ContainerDiv",
-"hfuDropHereClass" : ["myDropHereClass_1","myDropHereClass_2"],
-"hfuDropHereFocusClass" : "focus_DropHere",
+"hfuContainerDivFocusClass" : ["focus_ContainerDiv"],
+"hfuDropHereAreaClass" : ["hfuDropHereAreaClass_1","hfuDropHereAreaClass_2"],
+"hfuDropHereTextClass" : ["myDropHereClass_1","myDropHereClass_2"],
+"hfuDropHereTextFocusClass" : ["text_focus_DropHere"],
 "lang" : "en",
 "fileName" : "myFile[]",
-"hfuRemoveFileBtnClass": ["btn_class1","btn_class2", "btn_class3"],
+"hfuRemoveFileBtnClass": ["btn","btn-xs", "btn-danger"],
 "hfuFilenameSpanClass": ["span_class1","span_class2", "span_class3"]
 });
 </script>
