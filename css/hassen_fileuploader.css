@@ -1,4 +1,4 @@
-.hfuFilenameSpan {
+.MyFilenameSpanClass {
     margin-right: 5px;
 }
 
@@ -9,7 +9,7 @@
     cursor: pointer;
 }
 
-.hfuContainerDiv {
+.MyContainerDivClass {
     border: 2px solid #a4a4a4;
     border-style: dashed;
     width: 200px;
@@ -17,11 +17,11 @@
     position: relative;
 }
 
-.hfuContainerDivFocus {
+.MyContainerDivFocusClass {
     border-color: green;
 }
 
-.hfuDropHereArea {
+.MyDropHereAreaClass {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -30,11 +30,21 @@
     justify-content: center;
 }
 
-.hfuDropHereText {
+.MyDropHereTextClass {
     color: #d7d7d7;
     text-align: center;
 }
 
-.hfuDropHereTextFocus {
+.MyDropHereTextFocusClass {
     color: black;
+}
+
+.hfuSpanBtnContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 400px;
+    max-height: 30px;
+    margin-bottom: 2px !important;
+    padding: 5px !important;
 }

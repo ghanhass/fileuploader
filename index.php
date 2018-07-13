@@ -10,14 +10,14 @@
 <style>
 .myFilesList{
   float: left;
-  min-width: 200px;
+  width: 225px;
   overflow-y: auto;
   max-height: 211px;
   overflow-x: hidden;
   padding-right:5px;
   padding-left:5px;
 }
-.myFilesList>div>span {
+.myFilesList .MyFilenameSpanClass {
     float: left;
     margin-right: 5px;
     max-width: 80%;
@@ -26,22 +26,14 @@
     text-overflow: ellipsis;
 }
 
-.myFilesList>div>button {
+.myFilesList .MyRemoveFileBtnClass {
     float: right;
     height: 23px;
     width: 23px;
     padding: 1px;
 }
 
-.myFilesList div {
-    width: 100%;
-    min-height: 25px;
-    border: 1px solid grey;
-    max-width: 400px;
-    max-height: 30px;
-    margin-bottom: 2px;
-}
-.myContainerClass{
+.MyContainerDivClass{
   float:left;
   margin-right:10px;
 }
@@ -60,15 +52,17 @@ hfu_object = new hfu({
 "hfuFilesList" : "#filesList",
 "hfuFilesListClass" : ["myFilesList","myFilesList_1","myFilesList_2"],
 
-"hfuContainerDivClass" : ["myContainerClass","myContainerClass_1","myContainerClass_2"],
-"hfuContainerDivFocusClass" : ["focus_ContainerDiv"],
-"hfuDropHereAreaClass" : ["hfuDropHereAreaClass_1","hfuDropHereAreaClass_2"],
-"hfuDropHereTextClass" : ["myDropHereClass_1","myDropHereClass_2"],
-"hfuDropHereTextFocusClass" : ["text_focus_DropHere"],
+"hfuContainerDivClass" : ["MyContainerDivClass","MyContainerDivClass_1","MyContainerDivClass_2"],
+"hfuContainerDivFocusClass" : ["MyContainerDivFocusClass"],
+"hfuDropHereAreaClass" : ["MyDropHereAreaClass","MyDropHereAreaClass_2"],
+"hfuDropHereTextClass" : ["MyDropHereTextClass","MyDropHereTextClass_2"],
+"hfuDropHereTextFocusClass" : ["MyDropHereTextFocusClass"],
 "lang" : "en",
 "fileName" : "myFile[]",
-"hfuRemoveFileBtnClass": ["btn","btn-xs", "btn-danger"],
-"hfuFilenameSpanClass": ["span_class1","span_class2", "span_class3"]
+"hfuRemoveFileBtnClass": ["MyRemoveFileBtnClass","btn","btn-xs", "btn-danger"],
+"hfuFilenameSpanClass": ["MyFilenameSpanClass","MyFilenameSpanClass_2", "MyFilenameSpanClass_3"],
+"hfuSpanBtnContainerClass": ["MySpanBtnContainerClass","well","well-nice"],
+
 });
 </script>
 </body>

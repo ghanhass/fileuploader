@@ -13,7 +13,7 @@
  * @param {Array} config.hfuDropHereFocusClass - Array of custom classes to apply on the drop-here text of the plugin in focus mode (on hover). => optional
  * @param {Array} config.hfuRemoveFileBtnClass - Array of custom classes to apply on the hfuRemoveFileBtn of the plugin . => optional
  * @param {Array} config.hfuFilenameSpanClass - Array of custom classes to apply on the hfuFilenameSpan of the plugin . => optional
- * @param {Array} config.hfuRemoveFileBtnClass - Array of custom classes to apply on the hfuRemoveFileBtn of the plugin . => optional
+ * @param {Array} config.hfuSpanBtnContainerClass - Array of custom classes to apply on the div container of hfuFilenameSpanClass and hfuRemoveFileBtnClass plugin . => optional
  * @param {String} config.lang - main language of the plugin. (en/fr). - defaults to en => optional
  * @param {Array} config.fileTypes - Array of allowed file extensions (strings). => optional
  * @param {String} config.fileName - File name to use for the input element in the server script (php) => mandatory
@@ -261,17 +261,27 @@ class hfu {
                 console.log(event.timeStamp);
                 let newDivElement = document.createElement("div");
                 newDivElement.classList.add("hfuSpanBtnContainer");
+                //
                 let hfuFilenameSpan = document.createElement("span");
                 hfuFilenameSpan.textContent = this.files[0].name;
                 hfuFilenameSpan.classList.add("hfuFilenameSpan");
+                //
                 let hfuRemoveFileBtn = document.createElement("button");
-
                 hfuRemoveFileBtn.setAttribute("type", "button");
                 hfuRemoveFileBtn.classList.add("hfuRemoveFileBtn");
                 hfuRemoveFileBtn.dataset.id = event.timeStamp;
                 hfuRemoveFileBtn.textContent = 'X';
+
                 newDivElement.appendChild(hfuFilenameSpan);
                 newDivElement.appendChild(hfuRemoveFileBtn);
+
+                //
+                if (Array.isArray(this.hfuSpanBtnContainerClass)) { //User list of custom classes for the div container of hfuFilenameSpan and hfuRemoveFileBtn
+                    for (let i = 0; i < config.hfuFilesListClass.length; i++) {
+                        hfuFilesList.classList.add(config.hfuFilesListClass[i]);
+                    }
+                }
+                //
 
                 hfuFilesList.appendChild(newDivElement);
 
