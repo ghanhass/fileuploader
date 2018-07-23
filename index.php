@@ -61,7 +61,7 @@ hfu_object = new hfu({
 "fileName" : "myFile[]",
 "hfuRemoveFileBtnClass": ["MyRemoveFileBtnClass","btn","btn-xs", "btn-danger"],
 "hfuFilenameSpanClass": ["MyFilenameSpanClass","MyFilenameSpanClass_2", "MyFilenameSpanClass_3"],
-"hfuSpanBtnContainerClass": ["MySpanBtnContainerClass","well","well-nice"],
+"hfuSpanBtnContainerClass": ["well","well-nice"],
 
 });
 </script>

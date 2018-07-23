@@ -181,6 +181,8 @@ class hfu {
             //END checking for errors
 
             let hfuFileinputPrototype = document.querySelector(this.hfuFileinputPrototype);
+            this.hfuFileinputPrototypeOriginal = document.querySelector(this.hfuFileinputPrototype).cloneNode(true);
+
             let hfuFilesList = document.querySelector(config.hfuFilesList);
             if (!hfuFileinputPrototype.classList.contains("hfuFileinputPrototype")) { //targetted file input does NOT  have the 'hfuFileinputPrototype' class ? add it
                 hfuFileinputPrototype.classList.add("hfuFileinputPrototype");
@@ -415,9 +417,20 @@ class hfu {
         }
     }
 
-    destroy() {
 
+    destroy() {
+        try
+        {
+      let parent0 = document.querySelector(".hfuContainerDiv").parentNode;
+      parent0.insertBefore(this.hfuFileinputPrototypeOriginal, document.querySelector(".hfuContainerDiv"));
+      parent0.removeChild(document.querySelector(".hfuContainerDiv"));
+      document.querySelector( this.hfuFilesList).innerHTML = "";
+     }
+     catch(err){
+        console.log(err);
+        }
     }
+    
 }
 
 /*function hfu(config) {}*/
