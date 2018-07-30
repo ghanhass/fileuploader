@@ -1,4 +1,4 @@
-/**
+/** Hassen File Uploader
  * hfu is the general class for the plugin
  * @param {Object} config - general configuration object when instanciating hfu().
  * 
@@ -10,7 +10,8 @@
  * @param {Array} config.hfuDropHereAreaClass - Array of custom classes to apply on the drop-here area of the plugin. => optional
  * @param {Array} config.hfuFilesListClass - Array of custom classes to apply on the files list of the plugin. => optional
  * @param {Array} config.hfuContainerDivFocusClass - Array of custom classes to apply on the outer container DIV of the plugin in focus mode (on hover). => optional
- * @param {Array} config.hfuDropHereFocusClass - Array of custom classes to apply on the drop-here text of the plugin in focus mode (on hover). => optional
+ * @param {Array} config.hfuDropHereTextFocusClass - Array of custom classes to apply on the drop-here text of the plugin in focus mode (on hover). => optional
+ * @param {Array} config.hfuDropHereAreaFocusClass - Array of custom classes to apply on the drop-here area of the plugin in focus mode (on hover). => optional
  * @param {Array} config.hfuRemoveFileBtnClass - Array of custom classes to apply on the hfuRemoveFileBtn of the plugin . => optional
  * @param {Array} config.hfuFilenameSpanClass - Array of custom classes to apply on the hfuFilenameSpan of the plugin . => optional
  * @param {Array} config.hfuSpanBtnContainerClass - Array of custom classes to apply on the div container of hfuFilenameSpanClass and hfuRemoveFileBtnClass plugin . => optional
@@ -110,6 +111,20 @@ class hfu {
                 }
             }
             //
+
+            if (this.hfuDropHereAreaFocusClass != undefined) {
+                if (Array.isArray(this.hfuDropHereAreaFocusClass)) {
+                    for (let i = 0; i < this.hfuDropHereAreaFocusClass.length; i++) {
+                        if (this.hfuDropHereAreaFocusClass[i].indexOf(" ") != -1) {
+                            throw ("hfu ERROR: hfuDropHereAreaFocusClass property must be an Array of class names");
+                            break;
+                        }
+                    }
+                } else {
+                    throw ("hfu ERROR: hfuDropHereAreaFocusClass property must be an Array of class names");
+                }
+            }
+            //
             if (this.hfuDropHereTextClass != undefined) {
                 if (Array.isArray(this.hfuDropHereTextClass)) {
                     for (let i = 0; i < this.hfuDropHereTextClass.length; i++) {
@@ -181,6 +196,7 @@ class hfu {
             //END checking for errors
 
             let hfuFileinputPrototype = document.querySelector(this.hfuFileinputPrototype);
+		    let thisClass = this;
             this.hfuFileinputPrototypeOriginal = document.querySelector(this.hfuFileinputPrototype).cloneNode(true);
 
             let hfuFilesList = document.querySelector(config.hfuFilesList);
@@ -331,21 +347,13 @@ class hfu {
                     if (hfuDropHereText.classList.contains('hfuDropHereTextFocus')) { //remove .hfuDropHereTextFocus from hfuDropHereText after DROP
                         hfuDropHereText.classList.remove('hfuDropHereTextFocus');
                     }
-                    if (config.hfuDropHereFocusClass) {
-                        if (hfuDropHereText.classList.contains(config.hfuDropHereTextFocusClass)) { //remove config.hfuDropHereTextFocusClass from hfuDropHereText after DROP
-                            hfuDropHereText.classList.remove(config.hfuDropHereTextFocusClass);
-                        }
-                    }
+				    thisClass.removeClasses(hfuDropHereText, config.hfuDropHereTextFocusClass);
 
                     if (hfuContainerDiv.classList.contains('hfuContainerDivFocus')) { //remove .hfuContainerDivFocus from hfuContainerDiv after DROP
                         hfuContainerDiv.classList.remove('hfuContainerDivFocus');
                     }
-                    if (config.hfuContainerDivFocusClass) {
-                        if (hfuContainerDiv.classList.contains(config.hfuContainerDivFocusClass)) { //remove config.hfuContainerDivFocusClass from hfuDropHereText after DROP
-                            hfuContainerDiv.classList.remove(config.hfuContainerDivFocusClass);
-                        }
-                    }
-
+					thisClass.removeClasses(hfuContainerDiv, config.hfuContainerDivFocusClass);
+				    thisClass.removeClasses(hfuDropHereArea, config.hfuDropHereAreaFocusClass);
                 }
             });
 
@@ -357,23 +365,16 @@ class hfu {
                     if (!hfuContainerDiv.classList.contains('hfuContainerDivFocus')) {
                         hfuContainerDiv.classList.add('hfuContainerDivFocus');
                     }
-                    if (!hfuContainerDiv.classList.contains('hfuContainerDivFocus')) {
-                        hfuContainerDiv.classList.add('hfuContainerDivFocus');
-                    }
-                    if (config.hfuContainerDivFocusClass) {
-                        if (!hfuContainerDiv.classList.contains(config.hfuContainerDivFocusClass)) { //add config.hfuContainerDivFocusClass from hfuDropHere after DROP
-                            hfuContainerDiv.classList.add(config.hfuContainerDivFocusClass);
-                        }
-                    }
-
+                    
+                    thisClass.addClasses(hfuContainerDiv, config.hfuContainerDivFocusClass);//add config.hfuContainerDivFocusClass from hfuDropHere after DROP
+                    
                     if (!hfuDropHereText.classList.contains('hfuDropHereTextFocus')) {
                         hfuDropHereText.classList.add('hfuDropHereTextFocus');
                     }
-                    if (config.hfuDropHereTextFocusClass) {
-                        if (!hfuDropHereText.classList.contains(config.hfuDropHereTextFocusClass)) { //add config.hfuDropHereTextFocusClass from hfuDropHereText after DROP
-                            hfuDropHereText.classList.add(config.hfuDropHereTextFocusClass);
-                        }
-                    }
+
+                    thisClass.addClasses(hfuDropHereText, config.hfuDropHereTextFocusClass); //add config.hfuDropHereTextFocusClass from hfuDropHereText after DROP
+                    thisClass.addClasses(hfuDropHereArea, config.hfuDropHereAreaFocusClass); //add config.hfuDropHereAreaFocusClass from hfuDropHereArea after DROP
+
                 }
             });
             document.addEventListener("dragleave", function(event) {
@@ -382,20 +383,13 @@ class hfu {
                     if (hfuDropHereText.classList.contains('hfuDropHereTextFocus')) {
                         hfuDropHereText.classList.remove('hfuDropHereTextFocus');
                     }
-                    if (config.hfuDropHereTextFocusClass) {
-                        if (hfuDropHereText.classList.contains(config.hfuDropHereTextFocusClass)) { //remove config.hfuDropHereTextFocusClass from hfuDropHereText after DROP
-                            hfuDropHereText.classList.remove(config.hfuDropHereTextFocusClass);
-                        }
-                    }
+                    thisClass.removeClasses(hfuDropHereText, config.hfuDropHereTextFocusClass); //remove config.hfuDropHereTextFocusClass from hfuDropHereText after DROP
 
                     if (hfuContainerDiv.classList.contains('hfuContainerDivFocus')) {
                         hfuContainerDiv.classList.remove('hfuContainerDivFocus');
                     }
-                    if (config.hfuContainerDivFocusClass) {
-                        if (hfuContainerDiv.classList.contains(config.hfuContainerDivFocusClass)) { //remove config.hfuContainerDivFocusClass from hfuDropHere after DROP
-                            hfuContainerDiv.classList.remove(config.hfuContainerDivFocusClass);
-                        }
-                    }
+                    thisClass.removeClasses(hfuContainerDiv, config.hfuContainerDivFocusClass); //remove  config.hfuContainerDivFocusClass from hfuDropHere after DROP
+                    thisClass.removeClasses(hfuDropHereArea, config.hfuDropHereAreaFocusClass);
                 }
             });
             document.addEventListener("click", function(event) {
@@ -417,17 +411,32 @@ class hfu {
         }
     }
 
+    removeClasses(domElement, classArray){
+		if (Array.isArray(classArray)) {//Array of classes is really an existant array ?
+			classArray.forEach(function(oneClass){		
+				domElement.classList.remove(oneClass);
+			});
+        }
+    }
+    
+    addClasses(domElement, classArray){
+		if (Array.isArray(classArray)) {//Array of classes is really an existant array ?
+			classArray.forEach(function(oneClass){		
+				domElement.classList.add(oneClass);
+			});
+        }
+	}
 
     destroy() {
         try
         {
-      let parent0 = document.querySelector(".hfuContainerDiv").parentNode;
-      parent0.insertBefore(this.hfuFileinputPrototypeOriginal, document.querySelector(".hfuContainerDiv"));
-      parent0.removeChild(document.querySelector(".hfuContainerDiv"));
-      document.querySelector( this.hfuFilesList).innerHTML = "";
-     }
-     catch(err){
-        console.log(err);
+            let parent0 = document.querySelector(".hfuContainerDiv").parentNode;
+            parent0.insertBefore(this.hfuFileinputPrototypeOriginal, document.querySelector(".hfuContainerDiv"));
+            parent0.removeChild(document.querySelector(".hfuContainerDiv"));
+            document.querySelector( this.hfuFilesList).innerHTML = "";
+        }
+        catch(err){
+            console.log(err);
         }
     }
     

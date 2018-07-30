@@ -55,6 +55,7 @@ hfu_object = new hfu({
 "hfuContainerDivClass" : ["MyContainerDivClass","MyContainerDivClass_1","MyContainerDivClass_2"],
 "hfuContainerDivFocusClass" : ["MyContainerDivFocusClass"],
 "hfuDropHereAreaClass" : ["MyDropHereAreaClass","MyDropHereAreaClass_2"],
+"hfuDropHereAreaFocusClass" : ["MyDropHereAreaFocusClass","MyDropHereAreaFocusClass_2"],
 "hfuDropHereTextClass" : ["MyDropHereTextClass","MyDropHereTextClass_2"],
 "hfuDropHereTextFocusClass" : ["MyDropHereTextFocusClass"],
 "lang" : "en",
