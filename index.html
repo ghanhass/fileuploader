@@ -38,6 +38,38 @@
   float:left;
   margin-right:10px;
 }
+.MyContainerDivClass {
+    border: 2px solid #a4a4a4;
+    border-style: dashed;
+    width: 200px;
+    height: 200px;
+    position: relative;
+}
+
+.MyContainerDivFocusClass {
+    border-color: green;
+}
+
+.MyDropHereAreaClass {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.MyDropHereTextClass {
+    color: #d7d7d7;
+    text-align: center;
+}
+
+.MyDropHereTextFocusClass {
+    color: black;
+}
+.MyFilenameSpanClass {
+    margin-right: 5px;
+}
 </style>
 </head>
 <body>	
@@ -48,7 +80,7 @@
 </script>
 <script>
 hfu_object = new hfu({
-'hfuFileinputPrototype' : "#myFileinput",
+'hfuFileinput' : "#myFileinput",
 
 "hfuFilesList" : "#filesList",
 "hfuFilesListClass" : ["myFilesList","myFilesList_1","myFilesList_2"],

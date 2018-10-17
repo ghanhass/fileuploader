@@ -3,7 +3,7 @@
  * @param {Object} config - general configuration object when instanciating hfu().
  * 
  * //config elements:
- * @param {String} config.hfuFileinputPrototype - mandatory - Main file input to apply the plugin on. (CSS selector)
+ * @param {String} config.hfuFileinput - mandatory - Main file input to apply the plugin on. (CSS selector)
  * @param {String} config.hfuFilesList - mandatory - HTML Element in which the selected files' names menu will be shown up. (CSS selector)
  * @param {String} config.fileName - mandatory - File name to use for the input element in the server script
  * @param {Array} config.hfuContainerDivClass - optional - Array of custom classes to apply on the outer container DIV of the plugin. 
@@ -33,7 +33,9 @@ class hfu {
                     'fr': 'Supprimer le fichier',
                 },
             }
-            this.hfuFileinputPrototype = document.querySelector(config.hfuFileinputPrototype);
+            this.hfuFileinputOriginal = document.querySelector(config.hfuFileinput);
+            this.hfuFileinputPrototype = document.createElement('input');
+            this.hfuFileinputPrototype.setAttribute("type", "file");
             this.hfuFilesList = document.querySelector(config.hfuFilesList);
             this.hfuFilesListClass = config.hfuFilesListClass;
             this.hfuContainerDivClass = config.hfuContainerDivClass;
@@ -44,11 +46,13 @@ class hfu {
             this.fileName = config.fileName;
             this.hfuRemoveFileBtnClass = config.hfuRemoveFileBtnClass;
             this.hfuFilenameSpanClass = config.hfuFilenameSpanClass;
+            this.showTumbnail = config.showTumbnail;
             var self = this;
 
             //START checking for errors
-            if (this.hfuFileinputPrototype) { //hfuFileinputPrototype is a valid element ?
-                if (!(this.hfuFileinputPrototype.tagName == "INPUT" && this.hfuFileinputPrototype.getAttribute("type") == "file")) {
+            console.log(this.hfuFileinputOriginal);
+            if (this.hfuFileinputOriginal) { //hfuFileinputPrototype is a valid element ?
+                if (!(this.hfuFileinputOriginal.tagName == "INPUT" && this.hfuFileinputOriginal.getAttribute("type") == "file")) {
                     throw ("hfu ERROR: hfuFileinputPrototype must be a file input element name (one-element css selector string)");
                 }
             } else {
@@ -196,13 +200,13 @@ class hfu {
             //
             //END checking for errors
 
-            //X let hfuFileinputPrototype = document.querySelector(this.hfuFileinputPrototype);
-            this.hfuFileinputPrototypeOriginal = this.hfuFileinputPrototype.cloneNode(true);
+            //X let hfuFileinputPrototype = document.querySelector(this.hfuFileinputOriginal);
+            //this.hfuFileinputOriginalOriginal = this.hfuFileinputOriginal.cloneNode(true);
 
             //let hfuFilesList = document.querySelector(config.hfuFilesList);
             
             if (!this.hfuFileinputPrototype.classList.contains("hfuFileinputPrototype")) { //targetted file input does NOT  have the 'hfuFileinputPrototype' class ? add it
-            this.hfuFileinputPrototype.classList.add("hfuFileinputPrototype");
+                this.hfuFileinputPrototype.classList.add("hfuFileinputPrototype");
             }
 
             this.hfuFileinputPrototype.removeAttribute("multiple");
@@ -229,25 +233,25 @@ class hfu {
             hfuDropHereText.classList.add("hfuDropHereText");
             hfuDataDiv.classList.add("hfuDataDiv");
 
-            if (Array.isArray(this.hfuContainerDivClass)) { //User list of custom classes for hfuContainerDiv
+            if (Array.isArray(this.hfuContainerDivClass)) { //User list of custom classes for hfuContainerDiv defined ?
                 for (let i = 0; i < this.hfuContainerDivClass.length; i++) {
                     hfuContainerDiv.classList.add(this.hfuContainerDivClass[i]);
                 }
             }
             //
-            if (Array.isArray(this.hfuDropHereTextClass)) { //User list of custom classes for hfuDropHereText
+            if (Array.isArray(this.hfuDropHereTextClass)) { //User list of custom classes for hfuDropHereText defined ?
                 for (let i = 0; i < this.hfuDropHereTextClass.length; i++) {
                     hfuDropHereText.classList.add(this.hfuDropHereTextClass[i]);
                 }
             }
             //
-            if (Array.isArray(this.hfuDropHereAreaClass)) { //User list of custom classes for hfuDropHereArea
+            if (Array.isArray(this.hfuDropHereAreaClass)) { //User list of custom classes for hfuDropHereArea defined ?
                 for (let i = 0; i < this.hfuDropHereAreaClass.length; i++) {
                     hfuDropHereArea.classList.add(this.hfuDropHereAreaClass[i]);
                 }
             }
             //
-            if (Array.isArray(this.hfuFilesListClass)) { //User list of custom classes for hfuFilesList
+            if (Array.isArray(this.hfuFilesListClass)) { //User list of custom classes for hfuFilesList defined ?
                 for (let i = 0; i < this.hfuFilesListClass.length; i++) {
                     this.hfuFilesList.classList.add(this.hfuFilesListClass[i]);
                 }
@@ -255,20 +259,21 @@ class hfu {
             //
 
             hfuDropHereArea.appendChild(hfuDropHereText);
-
+            
+            hfuContainerDiv.appendChild(this.hfuFileinputPrototype);
             hfuContainerDiv.appendChild(hfuDropHereArea);
-            hfuContainerDiv.appendChild(this.hfuFileinputPrototype.cloneNode(true));
             hfuContainerDiv.appendChild(hfuDataDiv);
 
-
-            this.hfuFileinputPrototype.parentNode.insertBefore(hfuContainerDiv, this.hfuFileinputPrototype);
-            //this.hfuFileinputPrototype.parentNode.removeChild(this.hfuFileinputPrototype);
+            this.hfuFilesList.parentNode.insertBefore(hfuContainerDiv, this.hfuFilesList);
+            this.hfuFileinputOriginal.style.display = 'none';
+            //this.hfuFileinputOriginal.parentNode.removeChild(this.hfuFileinputOriginal);
             ////END building elements
 
 
             //START events 
-            hfuFileinputPrototype.addEventListener("change", function(event) {
-                self.checkFileType(hfuFileinputPrototype);
+            console.log(this.hfuFileinputPrototype)
+            this.hfuFileinputPrototype.addEventListener("change", function(event) {
+                self.checkFileType(this);
                 console.log("input changed !");
                 console.log(this);
                 console.log(this.files);
@@ -286,10 +291,10 @@ class hfu {
                 hfuRemoveFileBtn.classList.add("hfuRemoveFileBtn");
                 hfuRemoveFileBtn.dataset.id = event.timeStamp;
                 hfuRemoveFileBtn.textContent = 'X';
-                hfuRemoveFileBtn.setAttribute("title",texts.deleteFile[self.lang]);
+                hfuRemoveFileBtn.setAttribute("title",self.texts.deleteFile[self.lang]);
                 newDivElement.appendChild(hfuFilenameSpan);
                 newDivElement.appendChild(hfuRemoveFileBtn);
-                if(config.showTumbnail){//show thumbnail is on ?
+                if(self.showTumbnail){//show thumbnail is on ?
                     let imgElement = document.createElement("img");
                     if(currentFile.type.startsWith('image')){//image file selelcted ?
                         let fileReader = new FileReader();
@@ -309,30 +314,30 @@ class hfu {
                 }
                 newDivElement.setAttribute('title', currentFile.name);
                 //
-                if (Array.isArray(this.hfuSpanBtnContainerClass)) { //User list of custom classes for the div container of hfuFilenameSpan and hfuRemoveFileBtn
-                    for (let i = 0; i < config.hfuFilesListClass.length; i++) {
-                        hfuFilesList.classList.add(config.hfuFilesListClass[i]);
+                if (Array.isArray(self.hfuSpanBtnContainerClass)) { //User list of custom classes for the div container of hfuFilenameSpan and hfuRemoveFileBtn
+                    for (let i = 0; i < self.hfuFilesListClass.length; i++) {
+                        self.hfuFilesList.classList.add(self.hfuFilesListClass[i]);
                     }
                 }
                 //
-                hfuFilesList.appendChild(newDivElement);
+                self.hfuFilesList.appendChild(newDivElement);
 
                 //Start - add custom classes for hfuRemoveFileBtn  and  hfuFilenameSpan and hfuSpanBtnContainer DOM elements
-                if (Array.isArray(config.hfuFilenameSpanClass)) { //User list of custom classes for hfuFilenameSpan
-                    for (let i = 0; i < config.hfuFilenameSpanClass.length; i++) {
-                        hfuFilenameSpan.classList.add(config.hfuFilenameSpanClass[i]);
+                if (Array.isArray(self.hfuFilenameSpanClass)) { //User list of custom classes for hfuFilenameSpan
+                    for (let i = 0; i < self.hfuFilenameSpanClass.length; i++) {
+                        hfuFilenameSpan.classList.add(self.hfuFilenameSpanClass[i]);
                     }
                 }
                 //
-                if (Array.isArray(config.hfuRemoveFileBtnClass)) { //User list of custom classes for hfuRemoveFileBtn
-                    for (let i = 0; i < config.hfuRemoveFileBtnClass.length; i++) {
-                        hfuRemoveFileBtn.classList.add(config.hfuRemoveFileBtnClass[i]);
+                if (Array.isArray(self.hfuRemoveFileBtnClass)) { //User list of custom classes for hfuRemoveFileBtn
+                    for (let i = 0; i < self.hfuRemoveFileBtnClass.length; i++) {
+                        hfuRemoveFileBtn.classList.add(self.hfuRemoveFileBtnClass[i]);
                     }
                 }
 
-                if (Array.isArray(config.hfuSpanBtnContainerClass)) { //User list of custom classes for newDivElement
-                    for (let i = 0; i < config.hfuSpanBtnContainerClass.length; i++) {
-                        newDivElement.classList.add(config.hfuSpanBtnContainerClass[i]);
+                if (Array.isArray(self.hfuSpanBtnContainerClass)) { //User list of custom classes for newDivElement
+                    for (let i = 0; i < self.hfuSpanBtnContainerClass.length; i++) {
+                        newDivElement.classList.add(self.hfuSpanBtnContainerClass[i]);
                     }
                 }
                 //END - add custom classes for hfuRemoveFileBtn  and  hfuFilenameSpan and hfuSpanBtnContainer DOM elements
@@ -352,7 +357,7 @@ class hfu {
             });
 
             document.addEventListener("drop", function(event) {
-                if (!event.target.isSameNode(hfuFileinputPrototype)) { //drop NOT happened on the drop file zone ?
+                if (!event.target.isSameNode(self.hfuFilePlugin)) { //drop NOT happened on the drop file zone ?
                     //event.preventDefault();
                 } else {
                     console.log("drop !");
@@ -360,18 +365,18 @@ class hfu {
                     if (hfuDropHereText.classList.contains('hfuDropHereTextFocus')) { //remove .hfuDropHereTextFocus from hfuDropHereText after DROP
                         hfuDropHereText.classList.remove('hfuDropHereTextFocus');
                     }
-				    self.removeClasses(hfuDropHereText, config.hfuDropHereTextFocusClass);
+				    self.removeClasses(hfuDropHereText, self.hfuDropHereTextFocusClass);
 
                     if (hfuContainerDiv.classList.contains('hfuContainerDivFocus')) { //remove .hfuContainerDivFocus from hfuContainerDiv after DROP
                         hfuContainerDiv.classList.remove('hfuContainerDivFocus');
                     }
-					self.removeClasses(hfuContainerDiv, config.hfuContainerDivFocusClass);
-				    self.removeClasses(hfuDropHereArea, config.hfuDropHereAreaFocusClass);
+					self.removeClasses(hfuContainerDiv, self.hfuContainerDivFocusClass);
+				    self.removeClasses(hfuDropHereArea, self.hfuDropHereAreaFocusClass);
                 }
             });
 
             document.addEventListener("dragover", function(event) {
-                if (!event.target.isSameNode(hfuFileinputPrototype)) { //dragover NOT happened on the drop file zone ?
+                if (!event.target.isSameNode(self.hfuFilePlugin)) { //dragover NOT happened on the drop file zone ?
                     //event.preventDefault();
                 } else {
                     console.log("dragover !");
@@ -379,30 +384,30 @@ class hfu {
                         hfuContainerDiv.classList.add('hfuContainerDivFocus');
                     }
                     
-                    self.addClasses(hfuContainerDiv, config.hfuContainerDivFocusClass);//add config.hfuContainerDivFocusClass from hfuDropHere after DROP
+                    self.addClasses(hfuContainerDiv, self.hfuContainerDivFocusClass);//add self.hfuContainerDivFocusClass from hfuDropHere after DROP
                     
                     if (!hfuDropHereText.classList.contains('hfuDropHereTextFocus')) {
                         hfuDropHereText.classList.add('hfuDropHereTextFocus');
                     }
 
-                    self.addClasses(hfuDropHereText, config.hfuDropHereTextFocusClass); //add config.hfuDropHereTextFocusClass from hfuDropHereText after DROP
-                    self.addClasses(hfuDropHereArea, config.hfuDropHereAreaFocusClass); //add config.hfuDropHereAreaFocusClass from hfuDropHereArea after DROP
+                    self.addClasses(hfuDropHereText, self.hfuDropHereTextFocusClass); //add self.hfuDropHereTextFocusClass from hfuDropHereText after DROP
+                    self.addClasses(hfuDropHereArea, self.hfuDropHereAreaFocusClass); //add self.hfuDropHereAreaFocusClass from hfuDropHereArea after DROP
 
                 }
             });
             document.addEventListener("dragleave", function(event) {
-                if (event.target.isSameNode(hfuFileinputPrototype)) { //dragleave happened on the drop file zone ?
+                if (event.target.isSameNode(self.hfuFilePlugin)) { //dragleave happened on the drop file zone ?
                     console.log("dragleave !");
                     if (hfuDropHereText.classList.contains('hfuDropHereTextFocus')) {
                         hfuDropHereText.classList.remove('hfuDropHereTextFocus');
                     }
-                    self.removeClasses(hfuDropHereText, config.hfuDropHereTextFocusClass); //remove config.hfuDropHereTextFocusClass from hfuDropHereText after DROP
+                    self.removeClasses(hfuDropHereText, self.hfuDropHereTextFocusClass); //remove self.hfuDropHereTextFocusClass from hfuDropHereText after DROP
 
                     if (hfuContainerDiv.classList.contains('hfuContainerDivFocus')) {
                         hfuContainerDiv.classList.remove('hfuContainerDivFocus');
                     }
-                    self.removeClasses(hfuContainerDiv, config.hfuContainerDivFocusClass); //remove  config.hfuContainerDivFocusClass from hfuDropHere after DROP
-                    self.removeClasses(hfuDropHereArea, config.hfuDropHereAreaFocusClass);
+                    self.removeClasses(hfuContainerDiv, self.hfuContainerDivFocusClass); //remove  self.hfuContainerDivFocusClass from hfuDropHere after DROP
+                    self.removeClasses(hfuDropHereArea, self.hfuDropHereAreaFocusClass);
                 }
             });
             document.addEventListener("click", function(event) {
@@ -447,9 +452,10 @@ class hfu {
         try
         {
             let parent0 = document.querySelector(".hfuContainerDiv").parentNode;
-            parent0.insertBefore(this.hfuFileinputPrototypeOriginal, document.querySelector(".hfuContainerDiv"));
+            parent0.insertBefore(this.hfuFileinputOriginal, document.querySelector(".hfuContainerDiv"));
+            this.hfuFileinputOriginal.style.display = '';
             parent0.removeChild(document.querySelector(".hfuContainerDiv"));
-            document.querySelector( this.hfuFilesList).innerHTML = "";
+            this.hfuFilesList.innerHTML = "";
         }
         catch(err){
             console.log(err);
