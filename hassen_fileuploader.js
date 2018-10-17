@@ -3,22 +3,22 @@
  * @param {Object} config - general configuration object when instanciating hfu().
  * 
  * //config elements:
- * @param {String} config.hfuFileinputPrototype - Main file input to apply the plugin on. (CSS selector)  => mandatory
- * @param {String} config.hfuFilesList - HTMLElement in which the selected files' names menu will be shown up. (CSS selector) => mandatory
- * @param {Array} config.hfuContainerDivClass - Array of custom classes to apply on the outer container DIV of the plugin. => optional
- * @param {Array} config.hfuDropHereTextClass - Array of custom classes to apply on the drop-here text of the plugin. => optional
- * @param {Array} config.hfuDropHereAreaClass - Array of custom classes to apply on the drop-here area of the plugin. => optional
- * @param {Array} config.hfuFilesListClass - Array of custom classes to apply on the files list of the plugin. => optional
- * @param {Array} config.hfuContainerDivFocusClass - Array of custom classes to apply on the outer container DIV of the plugin in focus mode (on hover). => optional
- * @param {Array} config.hfuDropHereTextFocusClass - Array of custom classes to apply on the drop-here text of the plugin in focus mode (on hover). => optional
- * @param {Array} config.hfuDropHereAreaFocusClass - Array of custom classes to apply on the drop-here area of the plugin in focus mode (on hover). => optional
- * @param {Array} config.hfuRemoveFileBtnClass - Array of custom classes to apply on the hfuRemoveFileBtn of the plugin . => optional
- * @param {Array} config.hfuFilenameSpanClass - Array of custom classes to apply on the hfuFilenameSpan of the plugin . => optional
- * @param {Array} config.hfuSpanBtnContainerClass - Array of custom classes to apply on the div container of hfuFilenameSpanClass and hfuRemoveFileBtnClass plugin . => optional
- * @param {String} config.lang - main language of the plugin. (en/fr). - defaults to en => optional
- * @param {Array} config.fileTypes - Array of allowed file extensions (strings). => optional
- * @param {String} config.fileName - File name to use for the input element in the server script (php) => mandatory
- * @param {Bool} config.showTumbnail - true/false whether a thumbnail of the selected file should be shown (only images) - defaults to false => optional
+ * @param {String} config.hfuFileinputPrototype - mandatory - Main file input to apply the plugin on. (CSS selector)
+ * @param {String} config.hfuFilesList - mandatory - HTML Element in which the selected files' names menu will be shown up. (CSS selector)
+ * @param {String} config.fileName - mandatory - File name to use for the input element in the server script
+ * @param {Array} config.hfuContainerDivClass - optional - Array of custom classes to apply on the outer container DIV of the plugin. 
+ * @param {Array} config.hfuDropHereTextClass - optional - Array of custom classes to apply on the drop-here text of the plugin. 
+ * @param {Array} config.hfuDropHereAreaClass - optional - Array of custom classes to apply on the drop-here area of the plugin. 
+ * @param {Array} config.hfuFilesListClass - optional - Array of custom classes to apply on the files list of the plugin. 
+ * @param {Array} config.hfuContainerDivFocusClass - optional - Array of custom classes to apply on the outer container DIV of the plugin in focus mode (on hover). 
+ * @param {Array} config.hfuDropHereTextFocusClass - optional - Array of custom classes to apply on the drop-here text of the plugin in focus mode (on hover). 
+ * @param {Array} config.hfuDropHereAreaFocusClass - optional - Array of custom classes to apply on the drop-here area of the plugin in focus mode (on hover). 
+ * @param {Array} config.hfuRemoveFileBtnClass - optional - Array of custom classes to apply on the hfuRemoveFileBtn element . 
+ * @param {Array} config.hfuFilenameSpanClass - optional - Array of custom classes to apply on the hfuFilenameSpan element . 
+ * @param {Array} config.hfuSpanBtnContainerClass - optional - Array of custom classes to apply on the div container of hfuFilenameSpan and hfuRemoveFileBtn elements . 
+ * @param {String} config.lang - optional - main language of the plugin. (en/fr). - defaults to en 
+ * @param {Array} config.fileTypes - optional - Array of allowed file extensions (strings). 
+ * @param {Bool} config.showTumbnail - optional - true/false whether a thumbnail of the selected file should be shown (only images) - defaults to false
  */
 class hfu {
     constructor(config) {
