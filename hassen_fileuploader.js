@@ -357,7 +357,7 @@ class hfu {
             });
 
             document.addEventListener("drop", function(event) {
-                if (!event.target.isSameNode(self.hfuFilePlugin)) { //drop NOT happened on the drop file zone ?
+                if (!event.target.isEqualNode(self.hfuFileinputPrototype)) { //drop NOT happened on the drop file zone ?
                     //event.preventDefault();
                 } else {
                     console.log("drop !");
@@ -376,7 +376,7 @@ class hfu {
             });
 
             document.addEventListener("dragover", function(event) {
-                if (!event.target.isSameNode(self.hfuFilePlugin)) { //dragover NOT happened on the drop file zone ?
+                if (!event.target.isEqualNode(self.hfuFileinputPrototype)) { //dragover NOT happened on the drop file zone ?
                     //event.preventDefault();
                 } else {
                     console.log("dragover !");
@@ -396,7 +396,7 @@ class hfu {
                 }
             });
             document.addEventListener("dragleave", function(event) {
-                if (event.target.isSameNode(self.hfuFilePlugin)) { //dragleave happened on the drop file zone ?
+                if (event.target.isEqualNode(self.hfuFileinputPrototype)) { //dragleave happened on the drop file zone ?
                     console.log("dragleave !");
                     if (hfuDropHereText.classList.contains('hfuDropHereTextFocus')) {
                         hfuDropHereText.classList.remove('hfuDropHereTextFocus');
