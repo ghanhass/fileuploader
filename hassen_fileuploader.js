@@ -50,7 +50,7 @@ class hfu {
             var self = this;
 
             //START checking for errors
-            console.log(this.hfuFileinputOriginal);
+            //console.log(this.hfuFileinputOriginal);
             if (this.hfuFileinputOriginal) { //hfuFileinputPrototype is a valid element ?
                 if (!(this.hfuFileinputOriginal.tagName == "INPUT" && this.hfuFileinputOriginal.getAttribute("type") == "file")) {
                     throw ("hfu ERROR: hfuFileinputPrototype must be a file input element name (one-element css selector string)");
@@ -271,13 +271,13 @@ class hfu {
 
 
             //START events 
-            console.log(this.hfuFileinputPrototype)
+            //console.log(this.hfuFileinputPrototype)
             this.hfuFileinputPrototype.addEventListener("change", function(event) {
                 self.checkFileType(this);
                 console.log("input changed !");
-                console.log(this);
-                console.log(this.files);
-                console.log(event.timeStamp);
+                //console.log(this);
+                //console.log(this.files);
+                //console.log(event.timeStamp);
                 let newDivElement = document.createElement("div");
                 newDivElement.classList.add("hfuSpanBtnContainer");
                 //
@@ -310,6 +310,7 @@ class hfu {
                         imgElement.src = './img/file.png';
                     }
                     imgElement.style.height = '40px';
+                    imgElement.style.maxWidth = '33.33%';
                     newDivElement.insertBefore(imgElement, newDivElement.firstChild);
                 }
                 newDivElement.setAttribute('title', currentFile.name);
@@ -413,19 +414,19 @@ class hfu {
             document.addEventListener("click", function(event) {
                 if (event.target.classList.contains("hfuRemoveFileBtn")) {
                     let removeBtnElement = event.target;
-                    console.log(removeBtnElement);
+                    //console.log(removeBtnElement);
                     //console.log("remove btn clicked");
                     let inputElement = document.querySelector("input[data-id='" + removeBtnElement.dataset.id + "']");
-                    console.log(inputElement);
+                    //console.log(inputElement);
                     inputElement.parentNode.removeChild(inputElement);
                     let divElement = removeBtnElement.parentNode;
-                    console.log(divElement);
+                    //console.log(divElement);
                     divElement.parentNode.removeChild(divElement);
                 }
             });
             //END events  
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     }
 
@@ -446,6 +447,7 @@ class hfu {
     }
     checkFileType(fileInputElement){
         //nothing yet :D
+        console.log(fileInputElement.files[0])
     }
 
     destroy() {
