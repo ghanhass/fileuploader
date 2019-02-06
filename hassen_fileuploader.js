@@ -1,4 +1,4 @@
-/** Hassen File Uploader
+/** Hassen File Uploader     
  * hfu is the general class for the plugin
  * @param {Object} config - general configuration object when instanciating hfu().
  * 
