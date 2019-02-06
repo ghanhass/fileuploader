@@ -1,7 +1,7 @@
 /** Hassen File Uploader     
  * hfu is the general class for the plugin
  * @param {Object} config - general configuration object when instanciating hfu().
- * 
+ *  
  * //config elements:
  * @param {String} config.hfuFileinput - mandatory - Main file input to apply the plugin on. (CSS selector)
  * @param {String} config.hfuFilesList - mandatory - HTML Element in which the selected files' names menu will be shown up. (CSS selector)
