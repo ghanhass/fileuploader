@@ -27,10 +27,12 @@ class hfu {
                 "dropHereText": {
                     'en': 'Drop files here',
                     'fr': 'Glissez vos fichiers ici',
+                    'ar': "ضع الملفات هنا"
                 },
                 "deleteFile": {
                     'en': 'Delete file',
                     'fr': 'Supprimer le fichier',
+                    'ar': 'فسخ الملف'
                 },
             }
             this.hfuFileinputOriginal = document.querySelector(config.hfuFileinput);
