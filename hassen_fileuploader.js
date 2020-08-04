@@ -317,7 +317,7 @@ class hfu {
                 }
                 newDivElement.setAttribute('title', currentFile.name);
                 //
-                if (Array.isArray(self.hfuSpanBtnContainerClass)) { //User list of custom classes for the div container of hfuFilenameSpan and hfuRemoveFileBtn
+                if (Array.isArray(self.hfuSpanBtnContainerClass)) { //User list of custom classes for the div container of .hfuFilenameSpan and .hfuRemoveFileBtn
                     for (let i = 0; i < self.hfuFilesListClass.length; i++) {
                         self.hfuFilesList.classList.add(self.hfuFilesListClass[i]);
                     }
@@ -325,20 +325,20 @@ class hfu {
                 //
                 self.hfuFilesList.appendChild(newDivElement);
 
-                //Start - add custom classes for hfuRemoveFileBtn  and  hfuFilenameSpan and hfuSpanBtnContainer DOM elements
-                if (Array.isArray(self.hfuFilenameSpanClass)) { //User list of custom classes for hfuFilenameSpan
+                //Start - add user-defined custom classes for .hfuRemoveFileBtn and .hfuFilenameSpan and .hfuSpanBtnContainer DOM elements
+                if (Array.isArray(self.hfuFilenameSpanClass)) { //User list of custom classes for .hfuFilenameSpan
                     for (let i = 0; i < self.hfuFilenameSpanClass.length; i++) {
                         hfuFilenameSpan.classList.add(self.hfuFilenameSpanClass[i]);
                     }
                 }
                 //
-                if (Array.isArray(self.hfuRemoveFileBtnClass)) { //User list of custom classes for hfuRemoveFileBtn
+                if (Array.isArray(self.hfuRemoveFileBtnClass)) { //User list of custom classes for .hfuRemoveFileBtn
                     for (let i = 0; i < self.hfuRemoveFileBtnClass.length; i++) {
                         hfuRemoveFileBtn.classList.add(self.hfuRemoveFileBtnClass[i]);
                     }
                 }
 
-                if (Array.isArray(self.hfuSpanBtnContainerClass)) { //User list of custom classes for newDivElement
+                if (Array.isArray(self.hfuSpanBtnContainerClass)) { //User list of custom classes for .hfuSpanBtnContainer Element
                     for (let i = 0; i < self.hfuSpanBtnContainerClass.length; i++) {
                         newDivElement.classList.add(self.hfuSpanBtnContainerClass[i]);
                     }
@@ -360,9 +360,7 @@ class hfu {
             });
 
             document.addEventListener("drop", function(event) {
-                if (!event.target.isEqualNode(self.hfuFileinputPrototype)) { //drop NOT happened on the drop file zone ?
-                    //event.preventDefault();
-                } else {
+                if (event.target.isEqualNode(self.hfuFileinputPrototype)) { //drop happened on the drop file zone ?
                     console.log("drop !");
 
                     if (hfuDropHereText.classList.contains('hfuDropHereTextFocus')) { //remove .hfuDropHereTextFocus from hfuDropHereText after DROP
