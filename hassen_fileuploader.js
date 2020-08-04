@@ -1,4 +1,4 @@
-/** Hassen File Uploader     
+/** Hassoon File Uploader     
  * hfu is the general class for the plugin
  * @param {Object} config - general configuration object when instanciating hfu().
  *                  
@@ -7,16 +7,16 @@
  * @param {String} config.hfuFilesList - mandatory - HTML Element in which the selected files' names menu will be shown up. (CSS selector)
  * @param {String} config.fileName - mandatory - File name to use for the input element in the server script
  * @param {Array} config.hfuContainerDivClass - optional - Array of custom classes to apply on the outer container DIV of the plugin. 
- * @param {Array} config.hfuDropHereTextClass - optional - Array of custom classes to apply on the drop-here text of the plugin. 
- * @param {Array} config.hfuDropHereAreaClass - optional - Array of custom classes to apply on the drop-here area of the plugin. 
- * @param {Array} config.hfuFilesListClass - optional - Array of custom classes to apply on the files list of the plugin. 
+ * @param {Array} config.hfuDropHereTextClass - optional - Array of custom classes to apply on the Element of drop-here text of the plugin. 
+ * @param {Array} config.hfuDropHereAreaClass - optional - Array of custom classes to apply on the Element of drop-here area of the plugin. 
+ * @param {Array} config.hfuFilesListClass - optional - Array of custom classes to apply on the Element of files list of the plugin. 
  * @param {Array} config.hfuContainerDivFocusClass - optional - Array of custom classes to apply on the outer container DIV of the plugin in focus mode (on hover). 
- * @param {Array} config.hfuDropHereTextFocusClass - optional - Array of custom classes to apply on the drop-here text of the plugin in focus mode (on hover). 
- * @param {Array} config.hfuDropHereAreaFocusClass - optional - Array of custom classes to apply on the drop-here area of the plugin in focus mode (on hover). 
- * @param {Array} config.hfuRemoveFileBtnClass - optional - Array of custom classes to apply on the hfuRemoveFileBtn element . 
- * @param {Array} config.hfuFilenameSpanClass - optional - Array of custom classes to apply on the hfuFilenameSpan element . 
- * @param {Array} config.hfuSpanBtnContainerClass - optional - Array of custom classes to apply on the div container of hfuFilenameSpan and hfuRemoveFileBtn elements . 
- * @param {String} config.lang - optional - main language of the plugin. (en/fr). - defaults to en 
+ * @param {Array} config.hfuDropHereTextFocusClass - optional - Array of custom classes to apply on the Element of drop-here text of the plugin in focus mode (on hover). 
+ * @param {Array} config.hfuDropHereAreaFocusClass - optional - Array of custom classes to apply on the Element of drop-here area of the plugin in focus mode (on hover). 
+ * @param {Array} config.hfuRemoveFileBtnClass - optional - Array of custom classes to apply on the .hfuRemoveFileBtn Element . 
+ * @param {Array} config.hfuFilenameSpanClass - optional - Array of custom classes to apply on the .hfuFilenameSpan Element . 
+ * @param {Array} config.hfuSpanBtnContainerClass - optional - Array of custom classes to apply on the div container of .hfuFilenameSpan and .hfuRemoveFileBtn Elements . 
+ * @param {String} config.lang - optional - main language of the plugin. (en/fr/ar). - defaults to en 
  * @param {Array} config.fileTypes - optional - Array of allowed file extensions (strings). 
  * @param {Bool} config.showTumbnail - optional - true/false whether a thumbnail of the selected file should be shown (only images) - defaults to false
  */
